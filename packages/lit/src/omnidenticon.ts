@@ -44,7 +44,7 @@ export class Omnidenticon extends LitElement {
   }
 
   render() {
-    return html` <div ${ref(this.ref)}></div> `;
+    return html`<div ${ref(this.ref)}></div>`;
   }
 }
 
