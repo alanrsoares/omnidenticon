@@ -1,5 +1,6 @@
 import MersenneTwister from "./mersenne-twister";
 import Color from "./color";
+import { setAttribute, setAttributeNS, setStyle } from "./dom";
 
 export const DEFAULT_COLORS = [
   "#01888C",
@@ -44,35 +45,41 @@ export class OmnidenticonGenerator {
   }
 
   private newPaper(color: string): HTMLDivElement {
-    const container = document.createElement("div");
-    container.style.borderRadius = `${this.diameter / 2}px`;
-    container.style.overflow = "hidden";
-    container.style.padding = "0px";
-    container.style.margin = "0px";
-    container.style.width = `${this.diameter}px`;
-    container.style.height = `${this.diameter}px`;
-    container.style.display = "inline-block";
-    container.style.background = color;
-    return container;
+    return setStyle(document.createElement("div"), {
+      borderRadius: `${this.diameter / 2}px`,
+      overflow: "hidden",
+      padding: "0px",
+      margin: "0px",
+      width: `${this.diameter}px`,
+      height: `${this.diameter}px`,
+      display: "inline-block",
+      background: color,
+    });
   }
 
   private createGradient(svg: SVGSVGElement, colors: string[]): string {
     const gradientId = `grad${Math.round(this.generator.random() * 1000000)}`;
-    const gradient = document.createElementNS(SVGNS, "linearGradient");
-    gradient.setAttribute("id", gradientId);
-    gradient.setAttribute("x1", "0%");
-    gradient.setAttribute("y1", "0%");
-    gradient.setAttribute("x2", "100%");
-    gradient.setAttribute("y2", "100%");
+    const gradient = setAttribute(
+      document.createElementNS(SVGNS, "linearGradient"),
+      {
+        id: gradientId,
+        x1: "0%",
+        y1: "0%",
+        x2: "100%",
+        y2: "100%",
+      }
+    );
 
     colors.forEach((color, index) => {
-      const stop = document.createElementNS(SVGNS, "stop");
-      stop.setAttribute("offset", `${index * (100 / (colors.length - 1))}%`);
-      stop.setAttribute("stop-color", color);
+      const stop = setAttribute(document.createElementNS(SVGNS, "stop"), {
+        offset: `${index * (100 / (colors.length - 1))}%`,
+        "stop-color": color,
+      });
       gradient.appendChild(stop);
     });
 
     svg.appendChild(gradient);
+
     return gradientId;
   }
 
@@ -83,7 +90,6 @@ export class OmnidenticonGenerator {
     svg: SVGSVGElement
   ) {
     const center = this.diameter / 2;
-    const shape = document.createElementNS(SVGNS, "rect");
 
     const firstRot = this.generator.random();
     const angle = Math.PI * 2 * firstRot;
@@ -96,14 +102,13 @@ export class OmnidenticonGenerator {
     const secondRot = this.generator.random();
     const rot = firstRot * 360 + secondRot * 180;
     const rotate = `rotate(${rot.toFixed(1)} ${center} ${center})`;
-    const transform = `${translate} ${rotate}`;
 
-    setAttributeNS(shape, {
+    const shape = setAttributeNS(document.createElementNS(SVGNS, "rect"), {
       x: 0,
       y: 0,
       width: this.diameter,
       height: this.diameter,
-      transform,
+      transform: `${translate} ${rotate}`,
     });
 
     const shouldAddGradient = this.generator.random() > 0.5; // 50% chance to use gradient
@@ -124,9 +129,8 @@ export class OmnidenticonGenerator {
   public generateIdenticon(): HTMLDivElement {
     const remainingColors = this.hueShift([...this.colors]);
     const container = this.newPaper(this.genColor(remainingColors));
-    const svg = document.createElementNS(SVGNS, "svg");
 
-    setAttributeNS(svg, {
+    const svg = setAttributeNS(document.createElementNS(SVGNS, "svg"), {
       x: 0,
       y: 0,
       width: this.diameter,
@@ -139,15 +143,4 @@ export class OmnidenticonGenerator {
     }
     return container;
   }
-}
-
-function setAttributeNS<T extends SVGElement>(
-  el: T,
-  obj: Record<string, string | number>
-) {
-  for (let key in obj) {
-    el.setAttributeNS(null, key, String(obj[key]));
-  }
-
-  return el;
 }
