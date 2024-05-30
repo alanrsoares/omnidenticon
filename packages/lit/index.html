@@ -5,15 +5,61 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Lit + TS</title>
-    <link rel="stylesheet" href="./src/index.css" />
+    <link rel="stylesheet" href="./index.css" />
     <script type="module" src="/src/omnidenticon.ts"></script>
   </head>
-  <body>
-    <omni-identicon
-      address="cosmos15huzsfjrl0k6lhv00anz45zwzp06un2qz2s4mp"
-      prefix="cosmos"
-      diameter="256"
-      shapes="4"
-    ></omni-identicon>
+  <body class="grid place-items-center min-h-[100dvh]">
+    <main class="bg-base-200 card max-w-4xl mx-auto w-full">
+      <div
+        class="card-body grid place-items-center"
+        x-data="{ address: 'cosmos15huzsfjrl0k6lhv00anz45zwzp06un2qz2s4mp', prefix: 'cosmos', diameter: 256, shapes: 4 }"
+      >
+        <omni-identicon
+          x-bind:address="address"
+          x-bind:prefix="prefix"
+          x-bind:diameter="diameter"
+          x-bind:shapes="shapes"
+        ></omni-identicon>
+        <div class="grid grid-cols-2 gap-4">
+          <label class="form-control">
+            <span class="label">Address</span>
+            <input
+              type="text"
+              x-model="address"
+              class="input input-bordered"
+              @click="open = true"
+            />
+          </label>
+          <label class="form-control">
+            <span class="label">Prefix</span>
+            <input
+              type="text"
+              x-model="prefix"
+              class="input input-bordered"
+              @click="open = true"
+            />
+          </label>
+          <label class="form-control">
+            <span class="label">Diameter</span>
+            <input
+              type="number"
+              x-model="diameter"
+              class="input input-bordered"
+              @click="open = true"
+            />
+          </label>
+          <label class="form-control">
+            <span class="label">Shapes</span>
+            <input
+              type="number"
+              x-model="shapes"
+              class="input input-bordered"
+              @click="open = true"
+            />
+          </label>
+        </div>
+      </div>
+    </main>
+    <script src="//unpkg.com/alpinejs" defer></script>
   </body>
 </html>
