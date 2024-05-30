@@ -1,7 +1,14 @@
 {
   "name": "core",
-  "module": "index.ts",
+  "module": "./dist/index.ts",
   "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "jest"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
