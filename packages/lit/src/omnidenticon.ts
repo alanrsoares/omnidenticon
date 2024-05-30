@@ -1,13 +1,15 @@
 import { LitElement, html } from "lit";
-import { createRef, ref } from "lit/directives/ref.js";
+import { createRef } from "lit/directives/ref.js";
 import { customElement, property } from "lit/decorators.js";
 
 import { DEFAULT_COLORS, OmnidenticonGenerator } from "@omnidenticon/core";
 import { addressToNumber } from "@omnidenticon/core/utils";
 
+const WATCHED_PROPERTIES = ["address", "prefix", "diameter", "shapes"];
+
 @customElement("omni-identicon")
 export class Omnidenticon extends LitElement {
-  @property()
+  @property({ type: String })
   address = "";
 
   @property({ type: String })
@@ -30,21 +32,23 @@ export class Omnidenticon extends LitElement {
     return addressToNumber(this.address, this.prefix);
   }
 
-  firstUpdated(): void {
-    const generator = new OmnidenticonGenerator(
-      this.seed,
-      this.diameter,
-      this.shapes,
-      DEFAULT_COLORS
-    );
+  updated(changedProperties: Map<string | number | symbol, unknown>): void {
+    if (WATCHED_PROPERTIES.some((prop) => changedProperties.has(prop))) {
+      const generator = new OmnidenticonGenerator(
+        this.seed,
+        this.diameter,
+        this.shapes,
+        DEFAULT_COLORS
+      );
 
-    const identiconContainer = generator.generateIdenticon();
+      const target = this.renderRoot.querySelector("div");
 
-    this.ref.value?.replaceWith(identiconContainer);
+      target?.replaceWith(generator.generateIdenticon());
+    }
   }
 
   render() {
-    return html`<div ${ref(this.ref)}></div>`;
+    return html`<div></div>`;
   }
 }
 
