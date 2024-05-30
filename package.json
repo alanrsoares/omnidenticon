@@ -27,7 +27,8 @@
     "@commitlint/cli": "^19.2.2",
     "@commitlint/config-conventional": "^19.2.2",
     "@types/bun": "latest",
-    "husky": "^9.0.11"
+    "husky": "^9.0.11",
+    "turbo": "^1.13.3"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
