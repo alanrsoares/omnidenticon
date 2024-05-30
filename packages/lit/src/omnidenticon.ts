@@ -16,6 +16,9 @@ export class Omnidenticon extends LitElement {
   @property({ type: Number })
   diameter = 100;
 
+  @property({ type: Number })
+  shapes = 5;
+
   @property()
   ref = createRef();
 
@@ -31,7 +34,7 @@ export class Omnidenticon extends LitElement {
     const generator = new OmnidenticonGenerator(
       this.seed,
       this.diameter,
-      5,
+      this.shapes,
       DEFAULT_COLORS
     );
 

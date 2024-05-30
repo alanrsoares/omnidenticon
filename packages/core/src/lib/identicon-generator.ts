@@ -22,7 +22,7 @@ export class OmnidenticonGenerator {
   constructor(
     private seed: number,
     private diameter: number,
-    private shapeCount: number,
+    private shapes: number,
     private colors: string[]
   ) {
     this.generator = new MersenneTwister(this.seed);
@@ -134,8 +134,8 @@ export class OmnidenticonGenerator {
     });
 
     container.appendChild(svg);
-    for (let i = 0; i < this.shapeCount - 1; i++) {
-      this.genShape(remainingColors, i, this.shapeCount - 1, svg);
+    for (let i = 0; i < this.shapes - 1; i++) {
+      this.genShape(remainingColors, i, this.shapes - 1, svg);
     }
     return container;
   }
