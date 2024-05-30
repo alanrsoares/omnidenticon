@@ -1,10 +1,14 @@
 {
-  "name": "core",
+  "name": "@omnidenticon/core",
   "module": "./dist/index.ts",
   "type": "module",
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": "./dist/index.js",
+    "./utils": "./dist/lib/utils.js"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "test": "jest"
