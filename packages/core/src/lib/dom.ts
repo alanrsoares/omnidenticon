@@ -1,6 +1,8 @@
+export type AttributeRecord = Record<string, string | number>;
+
 export function setAttributeNS<T extends SVGElement>(
   el: T,
-  obj: Record<string, string | number>
+  obj: AttributeRecord
 ) {
   for (let key in obj) {
     el.setAttributeNS(null, key, String(obj[key]));
@@ -11,7 +13,7 @@ export function setAttributeNS<T extends SVGElement>(
 
 export function setAttribute<T extends SVGElement>(
   el: T,
-  obj: Record<string, string | number>
+  obj: AttributeRecord
 ) {
   for (let key in obj) {
     el.setAttribute(key, String(obj[key]));
