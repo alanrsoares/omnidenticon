@@ -1,5 +1,11 @@
 # @omnidenticon/lit
 
+## 0.1.1
+
+### Patch Changes
+
+- [`fdeeec0`](https://github.com/alanrsoares/omnidenticon/commit/fdeeec01ce3274f9fde7877017990597f7a97964) Thanks [@alanrsoares](https://github.com/alanrsoares)! - fix: tweak production build
+
 ## 0.1.0
 
 ### Minor Changes
