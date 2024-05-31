@@ -1,7 +1,10 @@
 {
   "name": "@omnidenticon/core",
   "version": "0.1.0",
-  "module": "./dist/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "module": "./dist/index.js",
   "type": "module",
   "files": [
     "dist"
