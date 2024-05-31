@@ -20,7 +20,6 @@ export default defineConfig({
       formats: ["es", "cjs"],
     },
     rollupOptions: {
-      external: /^lit/,
       plugins: [
         replace({
           "Reflect.decorate": "undefined",
