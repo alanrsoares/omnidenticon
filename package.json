@@ -2,6 +2,10 @@
   "name": "omnidenticon",
   "module": "index.ts",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alanrsoares/omnidenticon.git"
+  },
   "workspaces": [
     "packages/*"
   ],
