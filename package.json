@@ -6,23 +6,26 @@
     "type": "git",
     "url": "https://github.com/alanrsoares/omnidenticon.git"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "prepare": "husky install",
     "build": "turbo run build",
     "clean": "turbo run clean",
     "build:packages": "turbo run build --filter=\"./packages/*\"",
     "changeset": "changeset",
-    "changeset:release": "pnpm build:packages && changeset publish",
-    "changeset:release-snap": "pnpm build:packages && changeset publish --snapshot",
+    "changeset:release": "bun build:packages && changeset publish",
+    "changeset:release-snap": "bun build:packages && changeset publish --snapshot",
     "changeset:version": "changeset version",
     "changeset:publish": "changeset publish",
     "changeset:snap": "changeset version --snapshot snap",
     "cs": "changeset",
-    "cs:release": "pnpm changeset:release",
-    "cs:release-snap": "pnpm changeset:release-snap",
-    "cs:version": "pnpm changeset:version",
-    "cs:snap": "pnpm changeset:snap",
-    "cs:publish": "pnpm changeset:publish"
+    "cs:release": "bun changeset:release",
+    "cs:release-snap": "bun changeset:release-snap",
+    "cs:version": "bun changeset:version",
+    "cs:snap": "bun changeset:snap",
+    "cs:publish": "bun changeset:publish"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.0",
