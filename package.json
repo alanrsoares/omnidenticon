@@ -30,15 +30,16 @@
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.5",
-    "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
     "@commitlint/cli": "^19.2.2",
     "@commitlint/config-conventional": "^19.2.2",
+    "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
     "@types/bun": "latest",
     "changeset": "^0.2.6",
     "husky": "^9.0.11",
-    "turbo": "^1.13.3"
+    "turbo": "^2.5.2"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
-  }
+  },
+  "packageManager": "bun@1.2.10"
 }
